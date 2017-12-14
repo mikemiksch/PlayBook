@@ -10,12 +10,26 @@ import UIKit
 
 class ViewController: UIViewController {
     var lastPoint = CGPoint.zero
-    var red: CGFloat = 0.0
-    var green: CGFloat = 0.0
-    var blue: CGFloat = 0.0
+    var color : CGColor?
+//    var red: CGFloat = 0.0
+//    var green: CGFloat = 0.0
+//    var blue: CGFloat = 0.0
     var brushWidth: CGFloat = 10.0
     var opacity: CGFloat = 1.0
     var swiped = false
+    
+    let colors: [CGColor] = [
+    UIColor.black.cgColor,
+    UIColor.gray.cgColor,
+    UIColor.red.cgColor,
+    UIColor.orange.cgColor,
+    UIColor.yellow.cgColor,
+    UIColor.green.cgColor,
+    UIColor(red: 0.0/255.0, green: 144.0/255.0, blue: 81.0/255.0, alpha: 1.0).cgColor,
+    UIColor.blue.cgColor,
+    UIColor.cyan.cgColor,
+    UIColor.white.cgColor
+    ]
 
     @IBOutlet weak var mainImageView: UIImageView!
     @IBOutlet weak var tempImageView: UIImageView!
@@ -26,7 +40,6 @@ class ViewController: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         swiped = false
-//      if let touch = touches.first as? UITouch { Conditional downcast from UITouch? to UITouch does nothing
         if let touch = touches.first {
             lastPoint = touch.location(in: self.view)
         }
@@ -42,7 +55,10 @@ class ViewController: UIViewController {
         
         context?.setLineCap(.round)
         context?.setLineWidth(brushWidth)
-        context?.setStrokeColor(red: red, green: green, blue: blue, alpha: 1.0)
+        if let color = color {
+            context?.setStrokeColor(color)
+        }
+//        context?.setStrokeColor(red: red, green: green, blue: blue, alpha: 1.0)
         context?.setBlendMode(.normal)
         
         context?.strokePath()
@@ -75,6 +91,20 @@ class ViewController: UIViewController {
         tempImageView.image = nil
     }
 
-
+    @IBAction func pencilPressed(_ sender: Any) {
+        
+        var index = (sender as? UIButton)?.tag ?? 0
+        if index < 0 || index >= colors.count {
+            index = 0
+        }
+        
+        color = colors[index]
+        print("Set color to index \(index)")
+        
+        if index == colors.count - 1 {
+            opacity = 1.0
+        }
+    }
+    
 }
 
