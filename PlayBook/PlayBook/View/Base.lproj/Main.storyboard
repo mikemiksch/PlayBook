@@ -226,6 +226,7 @@
                     <connections>
                         <outlet property="mainImageView" destination="wJF-zf-KBW" id="B7m-cX-MLi"/>
                         <outlet property="pencilBox" destination="Y1q-jV-ZuN" id="a4h-1c-EJV"/>
+                        <outlet property="pencilBoxHeight" destination="7Rb-S1-BYM" id="V8n-QF-ZJg"/>
                         <outlet property="tempImageView" destination="2Qa-cZ-Fiy" id="B04-ff-XfQ"/>
                     </connections>
                 </viewController>
