@@ -169,6 +169,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="mainImageView" destination="wJF-zf-KBW" id="B7m-cX-MLi"/>
+                        <outlet property="tempImageView" destination="2Qa-cZ-Fiy" id="B04-ff-XfQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
