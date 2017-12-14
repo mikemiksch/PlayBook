@@ -105,6 +105,9 @@ class ViewController: UIViewController {
             opacity = 1.0
         }
     }
+    @IBAction func resetPressed(_ sender: Any) {
+        mainImageView.image = nil
+    }
     
 }
 
