@@ -11,12 +11,10 @@ import UIKit
 class ViewController: UIViewController {
     var lastPoint = CGPoint.zero
     var color : CGColor?
-//    var red: CGFloat = 0.0
-//    var green: CGFloat = 0.0
-//    var blue: CGFloat = 0.0
     var brushWidth: CGFloat = 10.0
     var opacity: CGFloat = 1.0
     var swiped = false
+    var canPaint = true
     
     let colors: [CGColor] = [
     UIColor.black.cgColor,
@@ -33,6 +31,7 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var mainImageView: UIImageView!
     @IBOutlet weak var tempImageView: UIImageView!
+    @IBOutlet weak var pencilBox: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,26 +45,27 @@ class ViewController: UIViewController {
     }
     
     func drawLineFrom(fromPoint: CGPoint, toPoint: CGPoint) {
-        UIGraphicsBeginImageContext(view.frame.size)
-        let context = UIGraphicsGetCurrentContext()
-        tempImageView.image?.draw(in: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
-        
-        context?.move(to: CGPoint(x: fromPoint.x, y: fromPoint.y))
-        context?.addLine(to: CGPoint(x: toPoint.x, y: toPoint.y))
-        
-        context?.setLineCap(.round)
-        context?.setLineWidth(brushWidth)
-        if let color = color {
-            context?.setStrokeColor(color)
+        if canPaint {
+            UIGraphicsBeginImageContext(view.frame.size)
+            let context = UIGraphicsGetCurrentContext()
+            tempImageView.image?.draw(in: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
+
+            context?.move(to: CGPoint(x: fromPoint.x, y: fromPoint.y))
+            context?.addLine(to: CGPoint(x: toPoint.x, y: toPoint.y))
+
+            context?.setLineCap(.round)
+            context?.setLineWidth(brushWidth)
+            if let color = color {
+                context?.setStrokeColor(color)
+            }
+            context?.setBlendMode(.normal)
+
+            context?.strokePath()
+
+            tempImageView.image = UIGraphicsGetImageFromCurrentImageContext()
+            tempImageView.alpha = opacity
+            UIGraphicsEndImageContext()
         }
-//        context?.setStrokeColor(red: red, green: green, blue: blue, alpha: 1.0)
-        context?.setBlendMode(.normal)
-        
-        context?.strokePath()
-        
-        tempImageView.image = UIGraphicsGetImageFromCurrentImageContext()
-        tempImageView.alpha = opacity
-        UIGraphicsEndImageContext()
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -99,7 +99,6 @@ class ViewController: UIViewController {
         }
         
         color = colors[index]
-        print("Set color to index \(index)")
         
         if index == colors.count - 1 {
             opacity = 1.0
@@ -107,6 +106,10 @@ class ViewController: UIViewController {
     }
     @IBAction func resetPressed(_ sender: Any) {
         mainImageView.image = nil
+    }
+    @IBAction func togglePressed(_ sender: Any) {
+        canPaint = !canPaint
+        UIView
     }
     
 }
