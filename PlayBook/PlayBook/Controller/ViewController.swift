@@ -33,6 +33,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var tempImageView: UIImageView!
     @IBOutlet weak var pencilBox: UIView!
     @IBOutlet weak var pencilBoxHeight: NSLayoutConstraint!
+    @IBOutlet weak var pencilBoxBottomConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,16 +110,18 @@ class ViewController: UIViewController {
         mainImageView.image = nil
     }
     @IBAction func togglePressed(_ sender: Any) {
-        canPaint = !canPaint
         if canPaint {
-        UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveEaseOut, animations: {
-            self.pencilBox.frame.origin.y -= self.pencilBox.frame.size.height
-        }, completion: nil)
+            pencilBoxBottomConstraint.constant = pencilBoxHeight.constant + 50
+            UIView.animate(withDuration: 0.25, animations: {
+                self.view.layoutIfNeeded()
+            })
         } else {
-            UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveEaseOut, animations: {
-                self.pencilBox.frame.origin.y += self.pencilBox.frame.size.height
-            }, completion: nil)
+            pencilBoxBottomConstraint.constant = 0
+            UIView.animate(withDuration: 0.25, animations: {
+                self.view.layoutIfNeeded()
+            })
         }
+        canPaint = !canPaint
     }
     
 }

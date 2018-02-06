@@ -175,7 +175,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="O8O-tj-DXk" secondAttribute="bottom" id="08C-RA-hDz"/>
                                     <constraint firstItem="jBc-cY-iIq" firstAttribute="leading" secondItem="UV3-ob-gOt" secondAttribute="trailing" id="3PF-oW-Njb"/>
@@ -226,6 +226,7 @@
                     <connections>
                         <outlet property="mainImageView" destination="wJF-zf-KBW" id="B7m-cX-MLi"/>
                         <outlet property="pencilBox" destination="Y1q-jV-ZuN" id="a4h-1c-EJV"/>
+                        <outlet property="pencilBoxBottomConstraint" destination="1et-xk-VNa" id="2r1-Kc-Fpg"/>
                         <outlet property="pencilBoxHeight" destination="7Rb-S1-BYM" id="V8n-QF-ZJg"/>
                         <outlet property="tempImageView" destination="2Qa-cZ-Fiy" id="B04-ff-XfQ"/>
                     </connections>
